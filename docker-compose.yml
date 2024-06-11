@@ -1,0 +1,24 @@
+#Configurar nuestro docker
+services:
+  postgres:
+    #la ultima imagen
+    image: postgres:latest
+    #para que siempre se reinicie
+    restart: always
+    #Entorno
+    environment:
+    #Utilizar las variables de entorno para la base de datos
+    #De esta manera se conecta java con la base de datos
+      POSTGRES_USER: ${SPRING_DATASOURSE_USERNAME}
+      POSTGRES_PASSWORD: ${SPRING_DATASOURSE_PASSWORD}
+      POSTGRES_DB: ${SPRING_DATASOURSE_DB}
+    #Puerto
+    ports:
+      - "5432:5432" #Significa que el puerto 5432 esta asignado al 5432 donde estara leyendo la bdd
+      
+    #Hacemos que se cree una carpeta llamada postgres que traiga toda la informacion de la bdd al visual
+    volumes: 
+     - ./postgres:/var/lib/postgresql/data
+
+    
+    
